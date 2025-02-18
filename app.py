@@ -19,10 +19,6 @@ def contact():
 def projects():
     return render_template("projects.html")
 
-@app.route("/practice/")
-def practice():
-    return render_template("practice.html")
-
 @app.route("/hello/")
 @app.route("/hello/<name>")
 def hello_there(name = "user"):
