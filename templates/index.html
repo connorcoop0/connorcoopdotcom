@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira+Extra+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Connor Coop</title>
+    <style>
+      .h1-about,
+      .h3-about,
+      .h6-about {
+        color: black;
+        font-family: Saira Extra Condensed;
+      }
+
+      .h1-about {
+        font-weight: 700;
+        font-size: 96px;
+        margin: 0px 0px 0px 0px;
+      }
+
+      .h2-about {
+        font-weight: 600;
+        font-size: 34px;
+        margin: -20px 0px 0px 0px;
+      }
+
+      .h3-about {
+        font-weight: 400;
+        font-size: 16px;
+        margin: 0px 0px 0px 0px;
+      }
+
+      p {
+        font-family: Roboto;
+      }
+
+      .content-section {
+        padding-left: 325px;
+        display: inline-block;
+      }
+
+      .about-section {
+        display: inline-block;
+      }
+
+      .subheading {
+        display: flex;
+      }
+
+      .link,
+      .link:visited {
+        color: black;
+        text-decoration: none;
+      }
+
+      .sidenav {
+        height: 100%;
+        width: 300px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(45, 62, 99, 0.884);
+        align-content: center;
+        justify-items: center;
+      }
+
+      .sidenav a {
+        margin: 50px 0px 50px 0px;
+        text-decoration: none;
+        font-size: 25px;
+        color: white;
+        display: block;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .sidenav-icon {
+        height: 25px;
+        width: 25px;
+        display: block;
+        justify-self: center;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body style="padding-bottom: 5000px">
+    <div class="sidenav">
+      <a href="#about-section"
+        ><img src="../static/images/about.png" class="sidenav-icon" />About</a
+      >
+      <a href="#education-section"
+        ><img
+          src="../static/images/education.png"
+          class="sidenav-icon"
+        />Education</a
+      >
+      <a href="#skills-section"
+        ><img src="../static/images/skills.png" class="sidenav-icon" />Skills</a
+      >
+      <a href="#projects-section"
+        ><img
+          src="../static/images/projects.png"
+          class="sidenav-icon"
+        />Projects</a
+      >
+      <a href="#experience-section"
+        ><img
+          src="../static/images/experience.png"
+          class="sidenav-icon"
+        />Experience</a
+      >
+    </div>
+
+    <div class="content-section">
+      <div id="about-section" class="about-section">
+        <h1 class="h1-about">CONNOR COOP</h1>
+        <h3 class="h2-about">SOFTWARE ENGINEER</h3>
+        <div class="h3-about">
+          St. Petersburg, FL &#x2022; &nbsp;
+
+          <a href="mailto:connorcoop0@gmail.com">connorcoop0@gmail.com</a>
+        </div>
+      </div>
+      <div style="padding-top: 1000px; padding-bottom: 1000px"></div>
+      <div id="education-section">
+        <h2>Education</h2>
+        <h3>Bachelors in Computer Science | Minor: Communications</h3>
+        <h3><i>Florida State University</i> | December 2024</h3>
+        <h3>Relevant Coursework</h3>
+        <ul>
+          <li>
+            Software Engineering, Data Structures, Databases, Artificial
+            Intelligence, Mobile Programming (Android)
+          </li>
+        </ul>
+      </div>
+      <div style="padding-top: 1000px; padding-bottom: 1000px"></div>
+      <div id="skills-section">
+        <h2>Skills/Certifications</h2>
+        <ul>
+          <li>
+            <b>Programming Languages</b>: C++, Python, MySQL, JavaScript, HTML,
+            CSS, Java, Unix/Linux scripting
+          </li>
+          <li>
+            <b>Frameworks & Libraries</b>: React, Node.js, Express, MongoDB
+          </li>
+          <li><b>Tools</b>: Android Studio, Git, Visual Studio Code</li>
+          <li><b>Certifications</b>: AWS Certified Cloud Practitioner</li>
+        </ul>
+      </div>
+      <div style="padding-top: 1000px; padding-bottom: 1000px"></div>
+      <div id="projects-section">
+        <h2>Projects</h2>
+        <h3>
+          <b>
+            Software Engineering Capstone Project | MERN Admin Dashboard |
+            <a href="https://github.com/connorcoop0/mern-admin-dashboard"
+              >GitHub Link</a
+            >
+          </b>
+        </h3>
+        <ul>
+          <li>
+            Developed a dynamic admin dashboard using React, integrating
+            real-world data to create multiple interactive pages and charts.
+          </li>
+          <li>
+            Collaborated with a team of 4 using GitHub for version control,
+            enhancing skills in Agile project management and teamwork.
+          </li>
+          <li>
+            Implemented backend functionalities with Node.js and Express,
+            connected to MongoDB for data management.
+          </li>
+        </ul>
+        <h3>
+          <b>
+            Android Weather App |
+            <a href="https://github.com/connorcoop0/WeatherApp">GitHub Link</a>
+          </b>
+        </h3>
+        <ul>
+          <li>
+            Developed an Android app using Java to fetch real-time weather data
+            via a public API, with an intuitive UI for city-based searches.
+          </li>
+          <li>
+            Parsed JSON responses to display detailed forecasts in a ListView,
+            implementing error handling for seamless user interaction.
+          </li>
+        </ul>
+      </div>
+      <div style="padding-top: 1000px; padding-bottom: 1000px"></div>
+      <div id="experience-section">
+        <h2>Work Experience</h2>
+        <h3 class="left-align">
+          <b>Intern | Bay Shellfish Co. | August 2023 – November 2023</b>
+        </h3>
+        <ul>
+          <li>
+            Processed and organized over 12 months of financial data in Excel,
+            ensuring 100% accuracy for grant application submissions.
+          </li>
+          <li>
+            Installed a 300-foot Wi-Fi bridge, increasing lab Wi-Fi connectivity
+            speeds greatly and enhancing operational efficiency for research
+            activities.
+          </li>
+        </ul>
+        <h3 class="left-align">
+          <b>Delivery Driver | Jimmy Johns | December 2022 – May 2023</b>
+        </h3>
+        <ul>
+          <li>
+            Delivered orders with 95% on-time accuracy while ensuring positive
+            customer interactions
+          </li>
+          <li>
+            Supported in-store operations during peak hours, assisting with food
+            prep and order packaging.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
