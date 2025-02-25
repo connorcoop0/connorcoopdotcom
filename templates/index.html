@@ -9,29 +9,43 @@
     />
     <title>Connor Coop</title>
     <style>
-      .h1-about,
-      .h3-about,
-      .h6-about {
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      a:link,
+      a:visited {
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+        text-decoration-color: #2471a3;
+      }
+
+      .h1-custom,
+      .h3-custom,
+      .h6-custom {
         color: black;
         font-family: Saira Extra Condensed;
       }
 
-      .h1-about {
+      .h1-custom {
         font-weight: 700;
         font-size: 96px;
         margin: 0px 0px 0px 0px;
       }
 
-      .h2-about {
+      .h2-custom {
         font-weight: 600;
         font-size: 34px;
         margin: -20px 0px 0px 0px;
       }
 
-      .h3-about {
+      .h3-custom {
         font-weight: 400;
-        font-size: 16px;
-        margin: 0px 0px 0px 0px;
+        font-size: 22px;
+        margin: 10px 0px 0px 0px;
       }
 
       p {
@@ -39,32 +53,67 @@
       }
 
       .content-section {
-        padding-left: 325px;
+        padding-left: 275px;
         display: inline-block;
       }
 
       .about-section {
-        display: inline-block;
+        margin-top: 200px;
+        display: flexbox;
+        align-items: center;
+        height: 700px;
+        border-bottom: 2px solid black;
+      }
+
+      .education-section {
+        margin-top: 50px;
+        display: flexbox;
+        align-items: center;
+        height: 700px;
+        border-bottom: 2px solid black;
+      }
+
+      .skills-section {
+        margin-top: 50px;
+        display: flexbox;
+        align-items: center;
+        height: 700px;
+        border-bottom: 2px solid black;
+      }
+
+      .projects-section {
+        margin-top: 50px;
+        display: flexbox;
+        align-items: center;
+        height: 700px;
+        border-bottom: 2px solid black;
+      }
+
+      .experience-section {
+        margin-top: 50px;
+        display: flexbox;
+        align-items: center;
+        height: 700px;
       }
 
       .subheading {
         display: flex;
       }
 
-      .link,
-      .link:visited {
-        color: black;
-        text-decoration: none;
-      }
-
       .sidenav {
         height: 100%;
-        width: 300px;
+        width: 250px;
         position: fixed;
+        display: flex;
+        flex-direction: column;
         top: 0;
         left: 0;
-        background-color: rgba(45, 62, 99, 0.884);
-        align-content: center;
+        background-color: #2471a3;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .sidenav-middle {
         justify-items: center;
       }
 
@@ -87,48 +136,106 @@
         justify-self: center;
         margin-bottom: 10px;
       }
+
+      .my-bio {
+        margin-top: 50px;
+        margin-bottom: 4cqmax;
+        color: rgba(104, 104, 104, 0.801);
+        font-family: Roboto;
+      }
+
+      .resume-pdf {
+        color: #2471a3;
+        font-family: Roboto;
+      }
+
+      .my-links {
+        margin-top: 20px;
+        margin-bottom: 200px;
+      }
+
+      .content-icons {
+        height: 50px;
+        width: 50px;
+        padding-right: 20px;
+        transition: height 0.35s, width 0.35s, opacity 0.35s;
+      }
+
+      .content-icons:hover {
+        height: 75px;
+        width: 75px;
+        opacity: 0.5;
+        cursor: pointer;
+      }
     </style>
   </head>
-  <body style="padding-bottom: 5000px">
+  <body>
     <div class="sidenav">
-      <a href="#about-section"
-        ><img src="../static/images/about.png" class="sidenav-icon" />About</a
-      >
-      <a href="#education-section"
-        ><img
-          src="../static/images/education.png"
-          class="sidenav-icon"
-        />Education</a
-      >
-      <a href="#skills-section"
-        ><img src="../static/images/skills.png" class="sidenav-icon" />Skills</a
-      >
-      <a href="#projects-section"
-        ><img
-          src="../static/images/projects.png"
-          class="sidenav-icon"
-        />Projects</a
-      >
-      <a href="#experience-section"
-        ><img
-          src="../static/images/experience.png"
-          class="sidenav-icon"
-        />Experience</a
-      >
+      <div class="sidenav-middle">
+        <a href="#about-section"
+          ><img src="../static/images/about.png" class="sidenav-icon" />About</a
+        >
+        <a href="#education-section"
+          ><img
+            src="../static/images/education.png"
+            class="sidenav-icon"
+          />Education</a
+        >
+        <a href="#skills-section"
+          ><img
+            src="../static/images/skills.png"
+            class="sidenav-icon"
+          />Skills</a
+        >
+        <a href="#projects-section"
+          ><img
+            src="../static/images/projects.png"
+            class="sidenav-icon"
+          />Projects</a
+        >
+        <a href="#experience-section"
+          ><img
+            src="../static/images/experience.png"
+            class="sidenav-icon"
+          />Experience</a
+        >
+      </div>
     </div>
 
-    <div class="content-section">
-      <div id="about-section" class="about-section">
-        <h1 class="h1-about">CONNOR COOP</h1>
-        <h3 class="h2-about">SOFTWARE ENGINEER</h3>
-        <div class="h3-about">
-          St. Petersburg, FL &#x2022; &nbsp;
-
-          <a href="mailto:connorcoop0@gmail.com">connorcoop0@gmail.com</a>
+    <div id="about-section" class="content-section">
+      <div class="about-section">
+        <h1 class="h1-custom">
+          CONNOR <span style="color: #2471a3">COOP</span>
+        </h1>
+        <h3 class="h2-custom">SOFTWARE ENGINEER</h3>
+        <div class="h3-custom">
+          ST. PETERSBURG, FL &#x2022; &nbsp;
+          <a href="mailto:connorcoop0@gmail.com" target="_blank"
+            ><span style="color: #2471a3">CONNORCOOP0@GMAIL.COM</span></a
+          >
+        </div>
+        <div class="my-bio">
+          I'm a passionate software developer who loves building innovative
+          solutions and solving challenging problems
+        </div>
+        <a href="../static/docs/CCoopResume.pdf" target="_blank"
+          ><span class="resume-pdf"> View Resume as PDF</span></a
+        >
+        <div class="my-links">
+          <img
+            class="content-icons"
+            src="../static/images/github.png"
+            alt="github"
+          />
+          <a href="https://www.linkedin.com/in/connorcoop0" target="_blank">
+            <img
+              class="content-icons"
+              src="../static/images/linkedin.png"
+              alt="linkedin"
+          /></a>
         </div>
       </div>
-      <div style="padding-top: 1000px; padding-bottom: 1000px"></div>
-      <div id="education-section">
+      <div id="education-section" class="education-section">
         <h2>Education</h2>
         <h3>Bachelors in Computer Science | Minor: Communications</h3>
         <h3><i>Florida State University</i> | December 2024</h3>
@@ -140,8 +247,7 @@
           </li>
         </ul>
       </div>
-      <div style="padding-top: 1000px; padding-bottom: 1000px"></div>
-      <div id="skills-section">
+      <div id="skills-section" class="skills-section">
         <h2>Skills/Certifications</h2>
         <ul>
           <li>
@@ -155,50 +261,71 @@
           <li><b>Certifications</b>: AWS Certified Cloud Practitioner</li>
         </ul>
       </div>
-      <div style="padding-top: 1000px; padding-bottom: 1000px"></div>
-      <div id="projects-section">
+      <div id="projects-section" class="projects-section">
         <h2>Projects</h2>
         <h3>
           <b>
             Software Engineering Capstone Project | MERN Admin Dashboard |
             <a href="https://github.com/connorcoop0/mern-admin-dashboard"
-              >GitHub Link</a
+              ><span style="color: #2471a3">GitHub Link</span></a
             >
           </b>
         </h3>
         <ul>
           <li>
-            Developed a dynamic admin dashboard using React, integrating
-            real-world data to create multiple interactive pages and charts.
+            Developed a fully interactive admin dashboard using React, featuring
+            dynamic charts, tables, and real-world data visualizations.
           </li>
           <li>
-            Collaborated with a team of 4 using GitHub for version control,
-            enhancing skills in Agile project management and teamwork.
+            Designed and implemented backend functionalities with Node.js and
+            Express, ensuring smooth data retrieval and updates.
           </li>
           <li>
-            Implemented backend functionalities with Node.js and Express,
-            connected to MongoDB for data management.
+            Integrated MongoDB for efficient data storage, retrieval, and
+            management, handling user roles and permissions effectively.
+          </li>
+          <li>
+            Collaborated with a team of four using Agile methodologies, version
+            control via GitHub, and structured code reviews to maintain
+            high-quality development standards.
+          </li>
+          <li>
+            Implemented filtering, sorting, and pagination features for
+            transaction tracking, providing users with seamless data navigation.
           </li>
         </ul>
         <h3>
           <b>
             Android Weather App |
-            <a href="https://github.com/connorcoop0/WeatherApp">GitHub Link</a>
+            <a href="https://github.com/connorcoop0/WeatherApp"
+              ><span style="color: #2471a3">GitHub Link</span></a
+            >
           </b>
         </h3>
         <ul>
           <li>
-            Developed an Android app using Java to fetch real-time weather data
-            via a public API, with an intuitive UI for city-based searches.
+            Developed a fully functional Android app using Java, enabling users
+            to fetch real-time weather data from a public API with a city-based
+            search feature.
           </li>
           <li>
-            Parsed JSON responses to display detailed forecasts in a ListView,
-            implementing error handling for seamless user interaction.
+            Designed an intuitive and responsive UI to display current weather
+            conditions and multi-day forecasts using ListView and custom
+            layouts.
+          </li>
+          <li>
+            Parsed JSON responses from API calls efficiently, extracting and
+            displaying detailed weather insights, including temperature,
+            humidity, and wind speed.
+          </li>
+          <li>
+            Implemented robust error handling for smooth user experience,
+            ensuring proper handling of missing, inaccurate, or unavailable
+            data.
           </li>
         </ul>
       </div>
-      <div style="padding-top: 1000px; padding-bottom: 1000px"></div>
-      <div id="experience-section">
+      <div id="experience-section" class="experience-section">
         <h2>Work Experience</h2>
         <h3 class="left-align">
           <b>Intern | Bay Shellfish Co. | August 2023 – November 2023</b>
