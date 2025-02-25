@@ -8,166 +8,7 @@
       rel="stylesheet"
     />
     <title>Connor Coop</title>
-    <style>
-      html {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      a:link,
-      a:visited {
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-        text-decoration-color: #2471a3;
-      }
-
-      .h1-custom,
-      .h3-custom,
-      .h6-custom {
-        color: black;
-        font-family: Saira Extra Condensed;
-      }
-
-      .h1-custom {
-        font-weight: 700;
-        font-size: 96px;
-        margin: 0px 0px 0px 0px;
-      }
-
-      .h2-custom {
-        font-weight: 600;
-        font-size: 34px;
-        margin: -20px 0px 0px 0px;
-      }
-
-      .h3-custom {
-        font-weight: 400;
-        font-size: 22px;
-        margin: 10px 0px 0px 0px;
-      }
-
-      p {
-        font-family: Roboto;
-      }
-
-      .content-section {
-        padding-left: 275px;
-        display: inline-block;
-      }
-
-      .about-section {
-        margin-top: 200px;
-        display: flexbox;
-        align-items: center;
-        height: 700px;
-        border-bottom: 2px solid black;
-      }
-
-      .education-section {
-        margin-top: 50px;
-        display: flexbox;
-        align-items: center;
-        height: 700px;
-        border-bottom: 2px solid black;
-      }
-
-      .skills-section {
-        margin-top: 50px;
-        display: flexbox;
-        align-items: center;
-        height: 700px;
-        border-bottom: 2px solid black;
-      }
-
-      .projects-section {
-        margin-top: 50px;
-        display: flexbox;
-        align-items: center;
-        height: 700px;
-        border-bottom: 2px solid black;
-      }
-
-      .experience-section {
-        margin-top: 50px;
-        display: flexbox;
-        align-items: center;
-        height: 700px;
-      }
-
-      .subheading {
-        display: flex;
-      }
-
-      .sidenav {
-        height: 100%;
-        width: 250px;
-        position: fixed;
-        display: flex;
-        flex-direction: column;
-        top: 0;
-        left: 0;
-        background-color: #2471a3;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .sidenav-middle {
-        justify-items: center;
-      }
-
-      .sidenav a {
-        margin: 50px 0px 50px 0px;
-        text-decoration: none;
-        font-size: 25px;
-        color: white;
-        display: block;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      .sidenav-icon {
-        height: 25px;
-        width: 25px;
-        display: block;
-        justify-self: center;
-        margin-bottom: 10px;
-      }
-
-      .my-bio {
-        margin-top: 50px;
-        margin-bottom: 4cqmax;
-        color: rgba(104, 104, 104, 0.801);
-        font-family: Roboto;
-      }
-
-      .resume-pdf {
-        color: #2471a3;
-        font-family: Roboto;
-      }
-
-      .my-links {
-        margin-top: 20px;
-        margin-bottom: 200px;
-      }
-
-      .content-icons {
-        height: 50px;
-        width: 50px;
-        padding-right: 20px;
-        transition: height 0.35s, width 0.35s, opacity 0.35s;
-      }
-
-      .content-icons:hover {
-        height: 75px;
-        width: 75px;
-        opacity: 0.5;
-        cursor: pointer;
-      }
-    </style>
+    <link rel="stylesheet" href="../static/site.css" />
   </head>
   <body>
     <div class="sidenav">
@@ -236,7 +77,7 @@
         </div>
       </div>
       <div id="education-section" class="education-section">
-        <h2>Education</h2>
+        <span class="section-header">EDUCATION</span>
         <h3>Bachelors in Computer Science | Minor: Communications</h3>
         <h3><i>Florida State University</i> | December 2024</h3>
         <h3>Relevant Coursework</h3>
@@ -248,25 +89,70 @@
         </ul>
       </div>
       <div id="skills-section" class="skills-section">
-        <h2>Skills/Certifications</h2>
+        <span class="section-header">SKILLS/CERTIFICATIONS</span>
         <ul>
           <li>
-            <b>Programming Languages</b>: C++, Python, MySQL, JavaScript, HTML,
-            CSS, Java, Unix/Linux scripting
+            <b style="color: black">Programming Languages</b>: C++, Python,
+            MySQL, JavaScript, HTML, CSS, Java, Unix/Linux scripting
           </li>
           <li>
-            <b>Frameworks & Libraries</b>: React, Node.js, Express, MongoDB
+            <b style="color: black">Frameworks & Libraries</b>: React, Node.js,
+            Express, MongoDB
           </li>
-          <li><b>Tools</b>: Android Studio, Git, Visual Studio Code</li>
-          <li><b>Certifications</b>: AWS Certified Cloud Practitioner</li>
+          <li>
+            <b style="color: black">Tools</b>: Android Studio, Git, Visual
+            Studio Code
+          </li>
+          <li>
+            <b style="color: black">Certifications</b>: AWS Certified Cloud
+            Practitioner
+          </li>
         </ul>
       </div>
       <div id="projects-section" class="projects-section">
-        <h2>Projects</h2>
+        <span class="section-header">PROJECTS</span>
+        <h3>
+          <b
+            >PERSONAL WEBSITE | AWS-POWERED FLASK APP |
+            <a
+              href="https://github.com/connorcoop0/connorcoopdotcom"
+              target="_blank"
+              ><span style="color: #2471a3">GitHub Link</span></a
+            ></b
+          >
+        </h3>
+        <ul>
+          <li>
+            Deployed a Flask web application on AWS using EC2, CloudFront, Route
+            53, Nginx, and Gunicorn, ensuring high availability and scalability.
+          </li>
+          <li>
+            Configured an EC2 instance with Ubuntu, setting up HTTP, HTTPS, and
+            port 8080 access for the web application.
+          </li>
+          <li>
+            Integrated Nginx as a reverse proxy and optimized server performance
+            for faster load times.
+          </li>
+          <li>
+            Secured HTTPS access with Certbot and automated SSL certificate
+            renewal.
+          </li>
+          <li>
+            Configured Route 53 DNS settings for efficient domain resolution and
+            improved accessibility.
+          </li>
+          <li>
+            Implemented auto-refresh functionality for seamless code updates and
+            a unique browser tab name change when users navigate away.
+          </li>
+        </ul>
         <h3>
           <b>
             Software Engineering Capstone Project | MERN Admin Dashboard |
-            <a href="https://github.com/connorcoop0/mern-admin-dashboard"
+            <a
+              href="https://github.com/connorcoop0/mern-admin-dashboard"
+              target="_blank"
               ><span style="color: #2471a3">GitHub Link</span></a
             >
           </b>
@@ -297,7 +183,7 @@
         <h3>
           <b>
             Android Weather App |
-            <a href="https://github.com/connorcoop0/WeatherApp"
+            <a href="https://github.com/connorcoop0/WeatherApp" target="_blank"
               ><span style="color: #2471a3">GitHub Link</span></a
             >
           </b>
@@ -326,9 +212,9 @@
         </ul>
       </div>
       <div id="experience-section" class="experience-section">
-        <h2>Work Experience</h2>
-        <h3 class="left-align">
-          <b>Intern | Bay Shellfish Co. | August 2023 – November 2023</b>
+        <span class="section-header">WORK EXPERIENCE</span>
+        <h3>
+          <b>INTERN | BAY SHELLFISH CO. | AUGUST 2023 – NOVEMBER 2023</b>
         </h3>
         <ul>
           <li>
@@ -336,22 +222,54 @@
             ensuring 100% accuracy for grant application submissions.
           </li>
           <li>
-            Installed a 300-foot Wi-Fi bridge, increasing lab Wi-Fi connectivity
-            speeds greatly and enhancing operational efficiency for research
-            activities.
+            Installed a 300-foot Wi-Fi bridge, greatly increasing lab Wi-Fi
+            connectivity speeds and enhancing operational efficiency for
+            research activities.
           </li>
         </ul>
-        <h3 class="left-align">
-          <b>Delivery Driver | Jimmy Johns | December 2022 – May 2023</b>
+
+        <h3>
+          <b
+            >SALES REPRESENTATIVE | CALL MOTIVATED SELLERS | OCTOBER 2021 – MAY
+            2022</b
+          >
+        </h3>
+        <ul>
+          <li>
+            Conducted high-volume outbound calls to potential leads, refining
+            cold calling and persuasive communication skills.
+          </li>
+          <li>
+            Managed and updated a CRM database, ensuring accurate documentation
+            of client interactions and lead status.
+          </li>
+        </ul>
+
+        <h3>
+          <b>DELIVERY DRIVER | JIMMY JOHN'S | DECEMBER 2022 – MAY 2023</b>
         </h3>
         <ul>
           <li>
             Delivered orders with 95% on-time accuracy while ensuring positive
-            customer interactions
+            customer interactions.
           </li>
           <li>
             Supported in-store operations during peak hours, assisting with food
             prep and order packaging.
+          </li>
+        </ul>
+
+        <h3>
+          <b>TEAM MEMBER | CHICK-FIL-A | SUMMER 2020 & SUMMER 2021</b>
+        </h3>
+        <ul>
+          <li>
+            Provided fast, friendly, and efficient customer service in a
+            high-volume environment.
+          </li>
+          <li>
+            Assisted with food preparation, cashiering, and drive-thru
+            operations to maintain quick service and quality standards.
           </li>
         </ul>
       </div>
