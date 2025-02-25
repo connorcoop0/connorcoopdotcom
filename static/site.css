@@ -176,56 +176,58 @@ html {
   cursor: pointer;
 }
 
-/* Add this media query to handle mobile devices */
+/* RESET FIXED HEIGHTS */
+.about-section,
+.education-section,
+.skills-section,
+.projects-section,
+.experience-section {
+  height: auto; /* Let them expand based on content */
+  margin-top: 50px;
+  display: block; /* Or display: flex if you want flex layouts, but avoid "flexbox" keyword */
+  border-bottom: 2px solid black;
+  padding-bottom: 30px; /* Extra padding to separate sections visually */
+}
+
+/* MEDIA QUERY FOR MOBILE */
 @media (max-width: 768px) {
-  .content-section {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .projects-section,
-  .experience-section {
-    margin-bottom: 40px; /* Add margin to prevent overlapping */
-  }
-
+  /* Let the sidenav become a top nav or shrink to fit */
   .sidenav {
+    position: static;
     width: 100%;
     height: auto;
-    position: relative;
+    display: flex;
+    flex-direction: row; /* Horizontal row across the top */
+    justify-content: center;
+    padding: 10px 0;
   }
 
   .sidenav a {
-    float: left;
-    padding: 15px;
+    margin: 0 10px; /* Adjust spacing between nav links */
+    font-size: 18px;
   }
 
-  .sidenav-middle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  /* Remove large left padding in content section */
+  .content-section {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
-  .sidenav-icon {
-    margin-bottom: 5px;
+  /* Text scaling for smaller screens */
+  .h1-custom {
+    font-size: 50px; /* Down from 96px */
   }
 
-  .about-section,
-  .education-section,
-  .skills-section,
-  .projects-section,
-  .experience-section {
-    padding: 10px;
+  .h2-custom {
+    font-size: 24px;
+    margin: -10px 0 0 0;
+  }
+
+  .h3-custom {
+    font-size: 18px;
   }
 
   .section-header {
-    font-size: 1.5em;
-  }
-
-  h3 {
-    font-size: 1.2em;
-  }
-
-  ul {
-    padding-left: 20px;
+    font-size: 30px;
   }
 }
