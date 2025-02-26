@@ -66,7 +66,7 @@ p {
 }
 
 .about-section {
-  margin-top: 200px;
+  margin-top: 600px;
   display: flexbox;
   align-items: center;
   height: 700px;
@@ -146,8 +146,6 @@ html {
 }
 
 .my-bio {
-  margin-top: 50px;
-  margin-bottom: 4cqmax;
   color: rgba(0, 0, 0, 0.596);
   font-family: Roboto;
 }
@@ -155,6 +153,8 @@ html {
 .resume-pdf {
   color: #2471a3;
   font-family: Roboto;
+  font-size: 20px;
+  margin-bottom: 25px;
 }
 
 .my-links {
@@ -163,15 +163,16 @@ html {
 }
 
 .content-icons {
-  height: 50px;
-  width: 50px;
-  padding-right: 20px;
+  margin-top: 60px;
+  height: 100px;
+  width: 100px;
+  padding-right: 60px;
   transition: height 0.35s, width 0.35s, opacity 0.35s;
 }
 
 .content-icons:hover {
-  height: 75px;
-  width: 75px;
+  height: 150px;
+  width: 150px;
   opacity: 0.5;
   cursor: pointer;
 }
@@ -182,40 +183,36 @@ html {
 .skills-section,
 .projects-section,
 .experience-section {
-  height: auto; /* Let them expand based on content */
+  height: auto;
   margin-top: 50px;
-  display: block; /* Or display: flex if you want flex layouts, but avoid "flexbox" keyword */
+  display: block;
   border-bottom: 2px solid black;
-  padding-bottom: 30px; /* Extra padding to separate sections visually */
+  padding-bottom: 30px;
 }
 
-/* MEDIA QUERY FOR MOBILE */
 @media (max-width: 768px) {
-  /* Let the sidenav become a top nav or shrink to fit */
   .sidenav {
     position: static;
     width: 100%;
     height: auto;
     display: flex;
-    flex-direction: row; /* Horizontal row across the top */
+    flex-direction: row;
     justify-content: center;
     padding: 10px 0;
   }
 
   .sidenav a {
-    margin: 0 10px; /* Adjust spacing between nav links */
+    margin: 0 10px;
     font-size: 18px;
   }
 
-  /* Remove large left padding in content section */
   .content-section {
     padding-left: 10px;
     padding-right: 10px;
   }
 
-  /* Text scaling for smaller screens */
   .h1-custom {
-    font-size: 50px; /* Down from 96px */
+    font-size: 50px;
   }
 
   .h2-custom {
