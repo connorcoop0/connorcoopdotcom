@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira+Extra+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Connor Coop</title>
+    <link rel="stylesheet" href="/static/site.css" />
+  </head>
+  <body>
+    <div class="sidenav">
+      <div class="sidenav-middle">
+        <a href="#about-section"
+          ><img src="../static/images/about.png" class="sidenav-icon" />About</a
+        >
+        <a href="#education-section"
+          ><img
+            src="../static/images/education.png"
+            class="sidenav-icon"
+          />Education</a
+        >
+        <a href="#skills-section"
+          ><img
+            src="../static/images/skills.png"
+            class="sidenav-icon"
+          />Skills</a
+        >
+        <a href="#projects-section"
+          ><img
+            src="../static/images/projects.png"
+            class="sidenav-icon"
+          />Projects</a
+        >
+        <a href="#experience-section"
+          ><img
+            src="../static/images/experience.png"
+            class="sidenav-icon"
+          />Experience</a
+        >
+      </div>
+    </div>
+
+    <div id="about-section" class="content-section">
+      <div class="about-section">
+        <h1 class="h1-custom">
+          CONNOR <span style="color: #2471a3">COOP</span>
+        </h1>
+        <h3 class="h2-custom">SOFTWARE ENGINEER</h3>
+        <div class="h3-custom">
+          ST. PETERSBURG, FL &#x2022; &nbsp;
+          <a
+            href="mailto:connorcoop0@gmail.com"
+            target="_blank"
+            style="font-family: 'Roboto Mono', monospace"
+          >
+            <span style="color: #2471a3">CONNORCOOP0@GMAIL.COM</span>
+          </a>
+        </div>
+        <div style="margin-top: 100px"></div>
+        <div class="my-bio">
+          I'm a passionate software developer who loves building innovative
+          solutions and solving challenging problems.
+        </div>
+        <div style="margin-bottom: 40px"></div>
+        <div class="my-bio">
+          This website is more than just a portfolio—it's a fully serverless AWS
+          application, designed with scalability, automation, and real-time
+          functionality at its core.
+        </div>
+        <div style="margin-bottom: 100px"></div>
+        <a href="../static/docs/CCoopResume.pdf" target="_blank"
+          ><span class="resume-pdf"> View Resume as PDF</span></a
+        >
+        <div class="my-links">
+          <a href="https://github.com/connorcoop0" target="_blank">
+            <img
+              class="content-icons"
+              src="../static/images/github.png"
+              alt="github"
+          /></a>
+          <a href="https://www.linkedin.com/in/connorcoop" target="_blank">
+            <img
+              class="content-icons"
+              src="../static/images/linkedin.png"
+              alt="linkedin"
+          /></a>
+        </div>
+      </div>
+      <div id="education-section" class="education-section">
+        <span class="section-header">EDUCATION</span>
+        <h3>Bachelors in Computer Science | Minor: Communications</h3>
+        <h3><i>Florida State University</i> | December 2024</h3>
+        <h3>Relevant Coursework</h3>
+        <ul>
+          <li>
+            Software Engineering, Data Structures, Databases, Artificial
+            Intelligence, Mobile Programming (Android)
+          </li>
+        </ul>
+      </div>
+      <div id="skills-section" class="skills-section">
+        <span class="section-header">SKILLS/CERTIFICATIONS</span>
+        <ul>
+          <li>
+            <b style="color: black">Programming Languages</b>: C++, Python,
+            MySQL, JavaScript, HTML, CSS, Java, Unix/Linux scripting
+          </li>
+          <li>
+            <b style="color: black">Frameworks & Libraries</b>: React, Node.js,
+            Express, MongoDB
+          </li>
+          <li>
+            <b style="color: black">Tools</b>: Android Studio, Git, Visual
+            Studio Code
+          </li>
+          <li>
+            <b style="color: black">Certifications</b>: AWS Certified Cloud
+            Practitioner
+          </li>
+        </ul>
+      </div>
+      <div id="projects-section" class="projects-section">
+        <span class="section-header">PROJECTS</span>
+        <h3>
+          <b
+            >PERSONAL WEBSITE | SERVERLESS AWS ARCHITECTURE |
+            <a
+              href="https://github.com/connorcoop0/connorcoopdotcom"
+              target="_blank"
+              ><span style="color: #2471a3">GitHub Link</span></a
+            ></b
+          >
+        </h3>
+        <ul>
+          <li>
+            Deployed a fully serverless Flask web application on AWS, utilizing
+            S3, CloudFront, API Gateway, and Lambda for scalable, cost-effective
+            hosting.
+          </li>
+          <li>
+            Configured S3 for static website hosting with secure HTTPS delivery
+            through CloudFront and custom domain management via Route 53.
+          </li>
+          <li>
+            Built serverless backend APIs using API Gateway and Lambda to log
+            visitor metrics into DynamoDB.
+          </li>
+          <li>
+            Developed custom JavaScript to fetch real-time visitor data via APIs
+            and dynamically update the frontend.
+          </li>
+          <li>
+            Integrated DynamoDB to securely store unique visitor records and
+            surfaced live visitor analytics directly on the website.
+          </li>
+          <li>
+            Optimized global content delivery with CloudFront caching,
+            compression, and SSL security, leveraging AWS Certificate Manager
+            (ACM) for automated certificate renewal.
+          </li>
+        </ul>
+        <h3>
+          <b>
+            Software Engineering Capstone Project | MERN Admin Dashboard |
+            <a
+              href="https://github.com/connorcoop0/mern-admin-dashboard"
+              target="_blank"
+              ><span style="color: #2471a3">GitHub Link</span></a
+            >
+          </b>
+        </h3>
+        <ul>
+          <li>
+            Developed a fully interactive admin dashboard using React, featuring
+            dynamic charts, tables, and real-world data visualizations.
+          </li>
+          <li>
+            Designed and implemented backend functionalities with Node.js and
+            Express, ensuring smooth data retrieval and updates.
+          </li>
+          <li>
+            Integrated MongoDB for efficient data storage, retrieval, and
+            management, handling user roles and permissions effectively.
+          </li>
+          <li>
+            Collaborated with a team of four using Agile methodologies, version
+            control via GitHub, and structured code reviews to maintain
+            high-quality development standards.
+          </li>
+          <li>
+            Implemented filtering, sorting, and pagination features for
+            transaction tracking, providing users with seamless data navigation.
+          </li>
+        </ul>
+        <h3>
+          <b>
+            Android Weather App |
+            <a href="https://github.com/connorcoop0/WeatherApp" target="_blank"
+              ><span style="color: #2471a3">GitHub Link</span></a
+            >
+          </b>
+        </h3>
+        <ul>
+          <li>
+            Developed a fully functional Android app using Java, enabling users
+            to fetch real-time weather data from a public API with a city-based
+            search feature.
+          </li>
+          <li>
+            Designed an intuitive and responsive UI to display current weather
+            conditions and multi-day forecasts using ListView and custom
+            layouts.
+          </li>
+          <li>
+            Parsed JSON responses from API calls efficiently, extracting and
+            displaying detailed weather insights, including temperature,
+            humidity, and wind speed.
+          </li>
+          <li>
+            Implemented robust error handling for smooth user experience,
+            ensuring proper handling of missing, inaccurate, or unavailable
+            data.
+          </li>
+        </ul>
+      </div>
+      <div id="experience-section" class="experience-section">
+        <span class="section-header">WORK EXPERIENCE</span>
+        <h3>
+          <b>INTERN | BAY SHELLFISH CO. | AUGUST 2023 – NOVEMBER 2023</b>
+        </h3>
+        <ul>
+          <li>
+            Processed and organized over 12 months of financial data in Excel,
+            ensuring 100% accuracy for grant application submissions.
+          </li>
+          <li>
+            Installed a 300-foot Wi-Fi bridge, greatly increasing lab Wi-Fi
+            connectivity speeds and enhancing operational efficiency for
+            research activities.
+          </li>
+        </ul>
+
+        <h3>
+          <b
+            >SALES REPRESENTATIVE | CALL MOTIVATED SELLERS | OCTOBER 2021 – MAY
+            2022</b
+          >
+        </h3>
+        <ul>
+          <li>
+            Conducted high-volume outbound calls to potential leads, refining
+            cold calling and persuasive communication skills.
+          </li>
+          <li>
+            Managed and updated a CRM database, ensuring accurate documentation
+            of client interactions and lead status.
+          </li>
+        </ul>
+
+        <h3>
+          <b>DELIVERY DRIVER | JIMMY JOHN'S | DECEMBER 2022 – MAY 2023</b>
+        </h3>
+        <ul>
+          <li>
+            Delivered orders with 95% on-time accuracy while ensuring positive
+            customer interactions.
+          </li>
+          <li>
+            Supported in-store operations during peak hours, assisting with food
+            prep and order packaging.
+          </li>
+        </ul>
+
+        <h3>
+          <b>TEAM MEMBER | CHICK-FIL-A | SUMMER 2020 & SUMMER 2021</b>
+        </h3>
+        <ul>
+          <li>
+            Provided fast, friendly, and efficient customer service in a
+            high-volume environment.
+          </li>
+          <li>
+            Assisted with food preparation, cashiering, and drive-thru
+            operations to maintain quick service and quality standards.
+          </li>
+        </ul>
+      </div>
+      <div
+        id="visitor-logs"
+        style="
+          margin: 40px 0;
+          padding: 20px;
+          background: #f4f4f4;
+          border-radius: 8px;
+          font-family: 'Roboto Mono', monospace;
+        "
+      >
+        <h2 style="color: #2471a3">Visitor Logs</h2>
+      </div>
+    </div>
+    <script>
+      fetch(
+        "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/logVisitor",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ event: "pageview" }),
+        }
+      ).catch((err) => console.error("Visitor logging failed", err));
+    </script>
+    <script>
+      async function loadVisitorLogs() {
+        try {
+          const response = await fetch(
+            "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/getVisitorLogs"
+          );
+          const logs = await response.json();
+
+          const container = document.getElementById("visitor-logs");
+          container.innerHTML =
+            '<h2 style="color: #2471a3; margin-bottom: 20px;">Visitor Logs</h2>';
+          container.style.fontFamily = '"Space Mono", monospace';
+
+          const uniqueVisitors = new Map();
+
+          logs.forEach((log) => {
+            const ip = log.ip || "Unknown IP";
+            if (!uniqueVisitors.has(ip)) {
+              uniqueVisitors.set(ip, log.timestamp);
+            }
+          });
+
+          // Total Unique Visitors Box
+          const totalDiv = document.createElement("div");
+          totalDiv.style.background = "#ffffff";
+          totalDiv.style.padding = "15px";
+          totalDiv.style.borderRadius = "8px";
+          totalDiv.style.marginBottom = "20px";
+          totalDiv.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
+          totalDiv.style.fontSize = "18px";
+          totalDiv.style.color = "#2471A3";
+          totalDiv.style.fontWeight = "bold";
+          totalDiv.style.fontFamily = '"Roboto Mono", monospace';
+          totalDiv.textContent = `Total Unique Visitors: ${uniqueVisitors.size}`;
+          container.appendChild(totalDiv);
+
+          // Individual Visit Timestamps
+          uniqueVisitors.forEach((timestamp) => {
+            const visitDiv = document.createElement("div");
+            visitDiv.style.background = "#f9f9f9";
+            visitDiv.style.padding = "10px";
+            visitDiv.style.borderRadius = "8px";
+            visitDiv.style.marginBottom = "10px";
+            visitDiv.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.08)";
+            visitDiv.style.fontFamily = '"Roboto Mono", monospace';
+            visitDiv.style.fontSize = "16px";
+            visitDiv.style.color = "#333333";
+
+            // Format timestamp nicely
+            const date = new Date(timestamp);
+            const formatted = date.toLocaleString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+
+            visitDiv.textContent = `Visited: ${formatted}`;
+            container.appendChild(visitDiv);
+          });
+        } catch (error) {
+          console.error("Failed to load visitor logs:", error);
+        }
+      }
+
+      loadVisitorLogs();
+      setInterval(loadVisitorLogs, 10000); // Refresh every 10 seconds
+    </script>
+  </body>
+</html>
