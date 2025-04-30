@@ -332,107 +332,93 @@
       </button>
     </div>
 
-    <script>
-      // POST page-view on load
-      fetch("https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/logVisitor", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ event: "pageview" }),
-      }).catch((err) => console.error("Visitor logging failed", err));
+<script>
+  // POST a page-view once at load
+  fetch("https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/logVisitor", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ event: "pageview" }),
+  }).catch(console.error);
 
-      // *************************
-      //  Visitor-log rendering
-      // *************************
-      async function loadVisitorLogs() {
-        try {
-          const res  = await fetch(
-            "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/getVisitorLogs"
-          );
-          const logs = await res.json();
+  // ───────────────── visitor logs ─────────────────
+  const VISIBLE = 5;           // rows always shown
+  let expanded  = false;       // toggle state
 
-          // DOM handles
-          const totalBox   = document.querySelector("#visitor-logs");
-          const listDiv    = document.getElementById("visitor-list");
-          const extraDiv   = document.getElementById("visitor-extra");
-          const toggleBtn  = document.getElementById("visitor-toggle");
+  async function loadVisitorLogs() {
+    try {
+      const res  = await fetch(
+        "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/getVisitorLogs"
+      );
+      const logs = await res.json();
 
-          listDiv.innerHTML  = "";
-          extraDiv.innerHTML = "";
+      // handles
+      const box   = document.getElementById("visitor-logs");
+      const list  = document.getElementById("visitor-list");
+      const extra = document.getElementById("visitor-extra");
+      const btn   = document.getElementById("visitor-toggle");
 
-          // Build map: one timestamp per unique IP
-          const uniq = new Map();
-          logs.forEach(({ ip = "Unknown IP", timestamp }) => {
-            if (!uniq.has(ip)) uniq.set(ip, timestamp);
+      // rebuild unique-IP map
+      const uniq = new Map();
+      logs.forEach(({ ip = "Unknown IP", timestamp }) => {
+        if (!uniq.has(ip)) uniq.set(ip, timestamp);
+      });
+
+      // fresh “total” card each poll
+      const card = document.createElement("div");
+      card.style.cssText =
+        "background:#fff;padding:15px;border-radius:8px;margin-bottom:20px;" +
+        "box-shadow:0 2px 4px rgba(0,0,0,.1);font-size:18px;color:#2471A3;font-weight:bold";
+      card.textContent = `Total Unique Visitors: ${uniq.size}`;
+      // replace old card (index 1, right after <h2>)
+      if (box.children[1]) box.children[1].replaceWith(card);
+
+      // build rows
+      const rows = [...uniq.entries()]
+        .sort((a, b) => new Date(b[1]) - new Date(a[1]))
+        .map(([_, ts]) => {
+          const d = new Date(ts).toLocaleString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
           });
+          return `
+            <div style="
+              background:#f9f9f9;padding:10px;border-radius:8px;margin-bottom:10px;
+              box-shadow:0 1px 3px rgba(0,0,0,.08);font-size:16px;color:#333">
+              Visited: ${d}
+            </div>`;
+        });
 
-          // Re-render total card
-          const totalCard = document.createElement("div");
-          totalCard.style.cssText = `
-            background:#fff;
-            padding:15px;
-            border-radius:8px;
-            margin-bottom:20px;
-            box-shadow:0 2px 4px rgba(0,0,0,0.1);
-            font-size:18px;
-            color:#2471A3;
-            font-weight:bold;
-          `;
-          totalCard.textContent = `Total Unique Visitors: ${uniq.size}`;
+      list.innerHTML  = rows.slice(0, VISIBLE).join("");
+      extra.innerHTML = rows.slice(VISIBLE).join("");
 
-          // replace old card (first child after <h2>)
-          if (totalBox.children[1]) totalBox.children[1].remove();
-          totalBox.insertBefore(totalCard, listDiv);
+      // show / hide long tail
+      extra.style.display = expanded ? "block" : "none";
 
-          // Sort newest → oldest and split
-          const rows = [...uniq.entries()]
-            .sort((a, b) => new Date(b[1]) - new Date(a[1]))
-            .map(([ip, ts]) => {
-              const d = new Date(ts).toLocaleString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              });
-              return `<div style="
-                  background:#f9f9f9;
-                  padding:10px;
-                  border-radius:8px;
-                  margin-bottom:10px;
-                  box-shadow:0 1px 3px rgba(0,0,0,0.08);
-                  font-size:16px;
-                  color:#333;
-                ">
-                  Visited: ${d}
-                </div>`;
-            });
-
-          const VISIBLE = 5;               // how many always shown
-          listDiv.innerHTML  = rows.slice(0, VISIBLE).join("");
-          extraDiv.innerHTML = rows.slice(VISIBLE).join("");
-
-          // Toggle button visibility
-          if (rows.length > VISIBLE) {
-            toggleBtn.style.display = "inline-block";
-          } else {
-            toggleBtn.style.display = "none";
-          }
-        } catch (err) {
-          console.error("Failed to load visitor logs:", err);
-        }
+      // button housekeeping
+      if (rows.length > VISIBLE) {
+        btn.style.display = "inline-block";
+        btn.textContent   = expanded ? "Hide" : "Show all";
+        // attach (or re-attach) handler
+        btn.onclick = () => {
+          expanded = !expanded;
+          extra.style.display = expanded ? "block" : "none";
+          btn.textContent     = expanded ? "Hide" : "Show all";
+        };
+      } else {
+        btn.style.display = "none";
       }
+    } catch (err) {
+      console.error("Failed to load visitor logs:", err);
+    }
+  }
 
-      // Toggle handler
-      document.getElementById("visitor-toggle").onclick = function () {
-        const extra = document.getElementById("visitor-extra");
-        const open  = extra.style.display !== "none";
-        extra.style.display = open ? "none" : "block";
-        this.textContent    = open ? "Show all" : "Hide";
-      };
+  // first run + polling
+  loadVisitorLogs();
+  setInterval(loadVisitorLogs, 30000);   // 30-s refresh
+</script>
 
-      // initial load + polling
-      loadVisitorLogs();
-      setInterval(loadVisitorLogs, 60000); // refresh every 60 s
-    </script>
   </body>
 </html>
