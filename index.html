@@ -301,98 +301,101 @@
         </ul>
       </div>
       <div
-        id="visitor-logs"
-        style="
-          margin: 40px 0;
-          padding: 20px;
-          background: #f4f4f4;
-          border-radius: 8px;
-          font-family: 'Roboto Mono', monospace;
-        "
-      >
-        <h2 style="color: #2471a3">Visitor Logs</h2>
-      </div>
-    </div>
-    <script>
-      fetch(
-        "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/logVisitor",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ event: "pageview" }),
+  id="visitor-logs"
+  style="
+    margin: 40px 0;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    font-family: 'Roboto Mono', monospace;
+  "
+>
+  <h2 style="color: #2471a3">Visitor Logs</h2>
+</div>
+
+<script>
+  fetch(
+    "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/logVisitor",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ event: "pageview" }),
+    }
+  ).catch((err) => console.error("Visitor logging failed", err));
+</script>
+
+<script>
+  async function loadVisitorLogs() {
+    try {
+      const response = await fetch(
+        "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/getVisitorLogs"
+      );
+      const logs = await response.json();
+
+      const container = document.getElementById("visitor-logs");
+      container.innerHTML =
+        '<h2 style="color: #2471a3; margin-bottom: 20px;">Visitor Logs</h2>';
+      container.style.fontFamily = '"Space Mono", monospace';
+
+      const uniqueVisitors = new Map();
+
+      logs.forEach((log) => {
+        const ip = log.ip || "Unknown IP";
+        if (!uniqueVisitors.has(ip)) {
+          uniqueVisitors.set(ip, log.timestamp);
         }
-      ).catch((err) => console.error("Visitor logging failed", err));
-    </script>
-    <script>
-      async function loadVisitorLogs() {
-        try {
-          const response = await fetch(
-            "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/getVisitorLogs"
-          );
-          const logs = await response.json();
+      });
 
-          const container = document.getElementById("visitor-logs");
-          container.innerHTML =
-            '<h2 style="color: #2471a3; margin-bottom: 20px;">Visitor Logs</h2>';
-          container.style.fontFamily = '"Space Mono", monospace';
+      // Total Unique Visitor Box
+      const totalDiv = document.createElement("div");
+      totalDiv.style.background = "#ffffff";
+      totalDiv.style.padding = "15px";
+      totalDiv.style.borderRadius = "8px";
+      totalDiv.style.marginBottom = "20px";
+      totalDiv.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
+      totalDiv.style.fontSize = "18px";
+      totalDiv.style.color = "#2471A3";
+      totalDiv.style.fontWeight = "bold";
+      totalDiv.style.fontFamily = '"Roboto Mono", monospace';
+      totalDiv.textContent = `Total Unique Visitors: ${uniqueVisitors.size}`;
+      container.appendChild(totalDiv);
 
-          const uniqueVisitors = new Map();
+      // Sort and display by most recent
+      [...uniqueVisitors.entries()]
+        .sort((a, b) => new Date(b[1]) - new Date(a[1]))
+        .forEach(([ip, timestamp]) => {
+          const visitDiv = document.createElement("div");
+          visitDiv.style.background = "#f9f9f9";
+          visitDiv.style.padding = "10px";
+          visitDiv.style.borderRadius = "8px";
+          visitDiv.style.marginBottom = "10px";
+          visitDiv.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.08)";
+          visitDiv.style.fontFamily = '"Roboto Mono", monospace';
+          visitDiv.style.fontSize = "16px";
+          visitDiv.style.color = "#333333";
 
-          logs.forEach((log) => {
-            const ip = log.ip || "Unknown IP";
-            if (!uniqueVisitors.has(ip)) {
-              uniqueVisitors.set(ip, log.timestamp);
-            }
+          const date = new Date(timestamp);
+          const formatted = date.toLocaleString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
           });
 
-          // Total Unique Visitor Box
-          const totalDiv = document.createElement("div");
-          totalDiv.style.background = "#ffffff";
-          totalDiv.style.padding = "15px";
-          totalDiv.style.borderRadius = "8px";
-          totalDiv.style.marginBottom = "20px";
-          totalDiv.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
-          totalDiv.style.fontSize = "18px";
-          totalDiv.style.color = "#2471A3";
-          totalDiv.style.fontWeight = "bold";
-          totalDiv.style.fontFamily = '"Roboto Mono", monospace';
-          totalDiv.textContent = `Total Unique Visitors: ${uniqueVisitors.size}`;
-          container.appendChild(totalDiv);
+          visitDiv.textContent = `Visited: ${formatted}`;
+          container.appendChild(visitDiv);
+        });
+    } catch (error) {
+      console.error("Failed to load visitor logs:", error);
+    }
+  }
 
-          // Individual Visit Timestamps
-          uniqueVisitors.forEach((timestamp) => {
-            const visitDiv = document.createElement("div");
-            visitDiv.style.background = "#f9f9f9";
-            visitDiv.style.padding = "10px";
-            visitDiv.style.borderRadius = "8px";
-            visitDiv.style.marginBottom = "10px";
-            visitDiv.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.08)";
-            visitDiv.style.fontFamily = '"Roboto Mono", monospace';
-            visitDiv.style.fontSize = "16px";
-            visitDiv.style.color = "#333333";
+  loadVisitorLogs();
+  setInterval(loadVisitorLogs, 10000); // Refresh every 10 seconds
+</script>
 
-            // Format timestamp nicely
-            const date = new Date(timestamp);
-            const formatted = date.toLocaleString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-            });
-
-            visitDiv.textContent = `Visited: ${formatted}`;
-            container.appendChild(visitDiv);
-          });
-        } catch (error) {
-          console.error("Failed to load visitor logs:", error);
-        }
-      }
-
-      loadVisitorLogs();
-      setInterval(loadVisitorLogs, 10000); // Refresh every 10 seconds
-    </script>
   </body>
 </html>
