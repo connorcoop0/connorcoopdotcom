@@ -300,102 +300,139 @@
           </li>
         </ul>
       </div>
-      <div
-  id="visitor-logs"
-  style="
-    margin: 40px 0;
-    padding: 20px;
-    background: #f4f4f4;
-    border-radius: 8px;
-    font-family: 'Roboto Mono', monospace;
-  "
->
-  <h2 style="color: #2471a3">Visitor Logs</h2>
-</div>
+    <div
+      id="visitor-logs"
+      style="
+        margin:40px 0;
+        padding:20px;
+        background:#f4f4f4;
+        border-radius:8px;
+        font-family:'Roboto Mono', monospace;
+      "
+    >
+      <h2 style="color:#2471a3">Visitor Logs</h2>
+      <!-- total-visitors card goes here via JS -->
+      <div id="visitor-list"></div>          <!-- visible rows -->
+      <div id="visitor-extra" style="display:none"></div><!-- hidden rows -->
+      <button
+        id="visitor-toggle"
+        style="
+          margin-top:10px;
+          padding:6px 12px;
+          background:#2471a3;
+          color:#fff;
+          border:none;
+          border-radius:6px;
+          cursor:pointer;
+          font-family:'Roboto Mono', monospace;
+          font-size:14px;
+        "
+      >
+        Show all
+      </button>
+    </div>
 
-<script>
-  fetch(
-    "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/logVisitor",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ event: "pageview" }),
-    }
-  ).catch((err) => console.error("Visitor logging failed", err));
-</script>
+    <script>
+      // POST page-view on load
+      fetch("https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/logVisitor", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ event: "pageview" }),
+      }).catch((err) => console.error("Visitor logging failed", err));
 
-<script>
-  async function loadVisitorLogs() {
-    try {
-      const response = await fetch(
-        "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/getVisitorLogs"
-      );
-      const logs = await response.json();
+      // *************************
+      //  Visitor-log rendering
+      // *************************
+      async function loadVisitorLogs() {
+        try {
+          const res  = await fetch(
+            "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/getVisitorLogs"
+          );
+          const logs = await res.json();
 
-      const container = document.getElementById("visitor-logs");
-      container.innerHTML =
-        '<h2 style="color: #2471a3; margin-bottom: 20px;">Visitor Logs</h2>';
-      container.style.fontFamily = '"Space Mono", monospace';
+          // DOM handles
+          const totalBox   = document.querySelector("#visitor-logs");
+          const listDiv    = document.getElementById("visitor-list");
+          const extraDiv   = document.getElementById("visitor-extra");
+          const toggleBtn  = document.getElementById("visitor-toggle");
 
-      const uniqueVisitors = new Map();
+          listDiv.innerHTML  = "";
+          extraDiv.innerHTML = "";
 
-      logs.forEach((log) => {
-        const ip = log.ip || "Unknown IP";
-        if (!uniqueVisitors.has(ip)) {
-          uniqueVisitors.set(ip, log.timestamp);
-        }
-      });
-
-      // Total Unique Visitor Box
-      const totalDiv = document.createElement("div");
-      totalDiv.style.background = "#ffffff";
-      totalDiv.style.padding = "15px";
-      totalDiv.style.borderRadius = "8px";
-      totalDiv.style.marginBottom = "20px";
-      totalDiv.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
-      totalDiv.style.fontSize = "18px";
-      totalDiv.style.color = "#2471A3";
-      totalDiv.style.fontWeight = "bold";
-      totalDiv.style.fontFamily = '"Roboto Mono", monospace';
-      totalDiv.textContent = `Total Unique Visitors: ${uniqueVisitors.size}`;
-      container.appendChild(totalDiv);
-
-      // Sort and display by most recent
-      [...uniqueVisitors.entries()]
-        .sort((a, b) => new Date(b[1]) - new Date(a[1]))
-        .forEach(([ip, timestamp]) => {
-          const visitDiv = document.createElement("div");
-          visitDiv.style.background = "#f9f9f9";
-          visitDiv.style.padding = "10px";
-          visitDiv.style.borderRadius = "8px";
-          visitDiv.style.marginBottom = "10px";
-          visitDiv.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.08)";
-          visitDiv.style.fontFamily = '"Roboto Mono", monospace';
-          visitDiv.style.fontSize = "16px";
-          visitDiv.style.color = "#333333";
-
-          const date = new Date(timestamp);
-          const formatted = date.toLocaleString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
+          // Build map: one timestamp per unique IP
+          const uniq = new Map();
+          logs.forEach(({ ip = "Unknown IP", timestamp }) => {
+            if (!uniq.has(ip)) uniq.set(ip, timestamp);
           });
 
-          visitDiv.textContent = `Visited: ${formatted}`;
-          container.appendChild(visitDiv);
-        });
-    } catch (error) {
-      console.error("Failed to load visitor logs:", error);
-    }
-  }
+          // Re-render total card
+          const totalCard = document.createElement("div");
+          totalCard.style.cssText = `
+            background:#fff;
+            padding:15px;
+            border-radius:8px;
+            margin-bottom:20px;
+            box-shadow:0 2px 4px rgba(0,0,0,0.1);
+            font-size:18px;
+            color:#2471A3;
+            font-weight:bold;
+          `;
+          totalCard.textContent = `Total Unique Visitors: ${uniq.size}`;
 
-  loadVisitorLogs();
-  setInterval(loadVisitorLogs, 10000); // Refresh every 10 seconds
-</script>
+          // replace old card (first child after <h2>)
+          if (totalBox.children[1]) totalBox.children[1].remove();
+          totalBox.insertBefore(totalCard, listDiv);
 
+          // Sort newest → oldest and split
+          const rows = [...uniq.entries()]
+            .sort((a, b) => new Date(b[1]) - new Date(a[1]))
+            .map(([ip, ts]) => {
+              const d = new Date(ts).toLocaleString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+              return `<div style="
+                  background:#f9f9f9;
+                  padding:10px;
+                  border-radius:8px;
+                  margin-bottom:10px;
+                  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+                  font-size:16px;
+                  color:#333;
+                ">
+                  Visited: ${d}
+                </div>`;
+            });
+
+          const VISIBLE = 5;               // how many always shown
+          listDiv.innerHTML  = rows.slice(0, VISIBLE).join("");
+          extraDiv.innerHTML = rows.slice(VISIBLE).join("");
+
+          // Toggle button visibility
+          if (rows.length > VISIBLE) {
+            toggleBtn.style.display = "inline-block";
+          } else {
+            toggleBtn.style.display = "none";
+          }
+        } catch (err) {
+          console.error("Failed to load visitor logs:", err);
+        }
+      }
+
+      // Toggle handler
+      document.getElementById("visitor-toggle").onclick = function () {
+        const extra = document.getElementById("visitor-extra");
+        const open  = extra.style.display !== "none";
+        extra.style.display = open ? "none" : "block";
+        this.textContent    = open ? "Show all" : "Hide";
+      };
+
+      // initial load + polling
+      loadVisitorLogs();
+      setInterval(loadVisitorLogs, 60000); // refresh every 60 s
+    </script>
   </body>
 </html>
