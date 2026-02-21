@@ -1,466 +1,1297 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira+Extra+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <title>Connor Coop</title>
-    <link rel="stylesheet" href="/static/site.css" />
-    <meta property="og:type"        content="website">
-    <meta property="og:url"         content="https://connorcoop.com/">
-    <meta property="og:title"       content="AWS-Powered Portfolio">
-    <meta property="og:description" content="Serverless AWS portfolio built with S3, CloudFront & DynamoDB">
-    <meta property="og:image"       content="https://connorcoop.com/static/images/preview.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height"content="630">
-  </head>
-  <body>
-    <div class="sidenav">
-      <div class="sidenav-middle">
-        <a href="#about-section"
-          ><img src="../static/images/about.png" class="sidenav-icon" />About</a
-        >
-        <a href="#education-section"
-          ><img
-            src="../static/images/education.png"
-            class="sidenav-icon"
-          />Education</a
-        >
-        <a href="#skills-section"
-          ><img
-            src="../static/images/skills.png"
-            class="sidenav-icon"
-          />Skills</a
-        >
-        <a href="#projects-section"
-          ><img
-            src="../static/images/projects.png"
-            class="sidenav-icon"
-          />Projects</a
-        >
-        <a href="#experience-section"
-          ><img
-            src="../static/images/experience.png"
-            class="sidenav-icon"
-          />Experience</a
-        >
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connor Coop | IT Professional & Developer</title>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://connorcoop.com/">
+  <meta property="og:title" content="Connor Coop | IT Professional & Developer">
+  <meta property="og:description" content="IT support, cloud solutions, and web development based in St. Pete, FL">
+  <meta property="og:image" content="https://connorcoop.com/static/images/preview.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #12121a;
+      --bg-card-hover: #1a1a26;
+      --accent: #c8ff00;
+      --accent-dim: rgba(200, 255, 0, 0.15);
+      --text: #e8e8ec;
+      --text-dim: #8888a0;
+      --text-muted: #55556a;
+      --border: #2a2a3a;
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(10, 10, 15, 0.8);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo {
+      font-family: 'Unbounded', cursive;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: all 0.3s;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.3;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200, 255, 0, 0.08), transparent 60%);
+      top: 10%;
+      right: -10%;
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+
+    .hero h1 {
+      font-family: 'Unbounded', cursive;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+
+    .hero h1 .accent { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: var(--text-dim);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.8s;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: #dfff55;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(200, 255, 0, 0.2);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 80px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1s;
+    }
+
+    .stat-item {
+      position: relative;
+    }
+
+    .stat-num {
+      font-family: 'Unbounded', cursive;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 100px 60px;
+      position: relative;
+    }
+
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Unbounded', cursive;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 60px;
+      letter-spacing: -1px;
+    }
+
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-text {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    .about-text p + p {
+      margin-top: 20px;
+    }
+
+    .about-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .detail-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      transition: all 0.3s;
+    }
+
+    .detail-card:hover {
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .detail-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    .detail-value {
+      font-family: 'Unbounded', cursive;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* ─── SERVICES ─── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover {
+      border-color: rgba(200, 255, 0, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+
+    .service-card h3 {
+      font-family: 'Unbounded', cursive;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* ─── SKILLS ─── */
+    .skills-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .skill-group h3 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-tag {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      transition: all 0.3s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(200, 255, 0, 0.25);
+      border-radius: var(--radius-sm);
+      padding: 14px 20px;
+      margin-top: 16px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .cert-badge:hover {
+      background: rgba(200, 255, 0, 0.2);
+      transform: translateX(4px);
+    }
+
+    .cert-badge .icon {
+      font-size: 1.2rem;
+    }
+
+    .cert-badge .label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ─── PROJECTS ─── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      transition: all 0.4s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      border-color: rgba(200, 255, 0, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .project-tech span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+    }
+
+    .project-card h3 {
+      font-family: 'Unbounded', cursive;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .project-card p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      color: var(--accent);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: gap 0.3s;
+    }
+
+    .project-link:hover { gap: 12px; }
+
+    /* ─── EXPERIENCE ─── */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 40px;
+      padding-bottom: 48px;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -5px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+    }
+
+    .timeline-item.current .timeline-dot {
+      box-shadow: 0 0 0 4px var(--accent-dim);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 4px var(--accent-dim); }
+      50% { box-shadow: 0 0 0 8px rgba(200, 255, 0, 0.05); }
+    }
+
+    .timeline-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .timeline-role {
+      font-family: 'Unbounded', cursive;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .timeline-company {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+
+    .timeline-details {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .timeline-details li {
+      margin-bottom: 6px;
+      list-style: none;
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .timeline-details li::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .edu-card h3 {
+      font-family: 'Unbounded', cursive;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .edu-card .school {
+      color: var(--text-dim);
+      font-size: 1rem;
+    }
+
+    .edu-year {
+      font-family: 'Unbounded', cursive;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      opacity: 0.5;
+    }
+
+    .edu-coursework {
+      width: 100%;
+      margin-top: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .edu-coursework .detail-label {
+      margin-bottom: 12px;
+    }
+
+    /* ─── VISITOR LOGS ─── */
+    .visitor-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      margin-top: 40px;
+    }
+
+    .visitor-section h3 {
+      font-family: 'Unbounded', cursive;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .visitor-count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .visitor-row {
+      background: rgba(255,255,255,0.02);
+      padding: 10px 16px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .visitor-row:hover {
+      border-color: var(--border);
+      background: rgba(255,255,255,0.04);
+    }
+
+    #visitor-toggle {
+      margin-top: 12px;
+      padding: 8px 18px;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+    }
+
+    #visitor-toggle:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    /* ─── CONTACT / FOOTER ─── */
+    .contact-section {
+      text-align: center;
+      padding: 120px 60px;
+    }
+
+    .contact-section .section-title {
+      margin-bottom: 20px;
+    }
+
+    .contact-sub {
+      color: var(--text-dim);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    footer {
+      padding: 40px 60px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    footer .built-with {
+      color: var(--text-dim);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 10, 15, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+
+      .hero { padding: 120px 24px 60px; }
+      section { padding: 60px 24px; }
+      .contact-section { padding: 80px 24px; }
+      footer { padding: 30px 24px; }
+
+      .hero-stats { gap: 28px; flex-wrap: wrap; }
+      .stat-num { font-size: 1.6rem; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-container { grid-template-columns: 1fr; }
+      .about-details { grid-template-columns: 1fr; }
+
+      .edu-card { flex-direction: column; text-align: center; }
+      .edu-year { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">connor<span>coop</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-tag">St. Petersburg, FL</div>
+    <h1>Connor<br><span class="accent">Coop</span></h1>
+    <p class="hero-sub">IT professional and developer helping small businesses and residents with hands-on tech support, cloud solutions, and custom web development.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get in Touch &darr;</a>
+      <a href="#services" class="btn btn-ghost">What I Do</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Clients Served</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">95%</div>
+        <div class="stat-label">First-Visit Resolution</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Websites Built</div>
       </div>
     </div>
+  </section>
 
-    <div id="about-section" class="content-section">
-      <div class="about-section">
-        <h1 class="h1-custom">
-          CONNOR <span style="color: #2471a3">COOP</span>
-        </h1>
-        <h3 class="h2-custom">SOFTWARE ENGINEER</h3>
-        <div class="h3-custom">
-          ST. PETERSBURG, FL &#x2022; &nbsp;
-          <a
-            href="mailto:connorcoop0@gmail.com"
-            target="_blank"
-            style="font-family: 'Roboto Mono', monospace"
-          >
-            <span style="color: #2471a3">CONNORCOOP0@GMAIL.COM</span>
+  <div class="section-divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="fade-in">
+      <div class="section-label">01 / About</div>
+      <h2 class="section-title">Who I Am</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I'm Connor, founder and lead technician at <strong style="color:var(--accent)">Coop Tech Support</strong>. I help small businesses and residential clients solve real tech problems, from sluggish Wi-Fi to full cloud migrations.</p>
+          <p>With a Computer Science degree from Florida State and an AWS Solutions Architect certification, I bring both the technical depth and the communication skills to explain things clearly and get the job done right.</p>
+          <p>My entire client base has been built through word-of-mouth referrals. I take that seriously. It means every job gets my full attention.</p>
+        </div>
+        <div class="about-details">
+          <div class="detail-card">
+            <div class="detail-label">Based in</div>
+            <div class="detail-value">St. Pete, FL</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-label">Business</div>
+            <div class="detail-value">Coop Tech Support</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-label">Education</div>
+            <div class="detail-value">B.A. Computer Science, FSU</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-label">Availability</div>
+            <div class="detail-value">Onsite &amp; Remote</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="fade-in">
+      <div class="section-label">02 / Services</div>
+      <h2 class="section-title">What I Do</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <h3>IT Support</h3>
+          <p>Onsite and remote troubleshooting for PCs, laptops, and peripherals across Windows and macOS. Printers, scanners, software installs, the works.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg></div>
+          <h3>Wi-Fi &amp; Networking</h3>
+          <p>Home and office network setup, dead zone fixes, Wi-Fi bridge installs, and connectivity optimization so everything just works.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+          <h3>Cloud Solutions</h3>
+          <p>AWS hosting, OneDrive, iCloud, and Google Workspace migrations. Secure, scalable setups that save you money over traditional hosting.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg></div>
+          <h3>Web Development</h3>
+          <p>Custom websites for small businesses and nonprofits. Clean, fast, and built to drive real results for your online presence.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <h3>CRM &amp; Email</h3>
+          <p>CRM setup, email marketing integrations, and workflow automation to help you stay organized and reach your customers.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+          <h3>Data &amp; Docs</h3>
+          <p>Data cleanup, Excel organization, cloud file migrations, and structured documentation so nothing falls through the cracks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="fade-in">
+      <div class="section-label">03 / Skills</div>
+      <h2 class="section-title">My Toolkit</h2>
+      <div class="skills-container">
+        <div class="skill-group">
+          <h3>Languages &amp; Data</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML/CSS</span>
+            <span class="skill-tag">Bash</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Pandas</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Cloud &amp; DevOps</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS (S3, EC2, Lambda, CloudFront)</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">CI/CD</span>
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">Linux/Unix</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Tools &amp; Frameworks</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">Git/GitHub</span>
+            <span class="skill-tag">VS Code</span>
+            <span class="skill-tag">MS Excel</span>
+            <span class="skill-tag">SQL Server</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Certifications</h3>
+          <a href="https://www.credly.com/badges/38b0ef8a-f38e-48a3-9a0c-f09f0720f3a0" target="_blank" class="cert-badge">
+            <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span>
+            <span class="label">AWS Solutions Architect &ndash; Associate</span>
+          </a>
+          <a href="https://www.credly.com/earner/earned/share/97820de0-9c6d-4e01-95ea-bb8e721c83df" target="_blank" class="cert-badge">
+            <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span>
+            <span class="label">AWS Cloud Practitioner</span>
           </a>
         </div>
-        <div style="margin-top: 100px"></div>
-        <div class="my-bio">
-          I'm a passionate software developer who loves building innovative
-          solutions and solving challenging problems.
-        </div>
-        <div style="margin-bottom: 40px"></div>
-        <div class="my-bio">
-          This website is more than just a portfolio—it's a fully serverless AWS
-          application, designed with scalability, automation, and real-time
-          functionality at it's core.
-        </div>
-        <div style="margin-bottom: 100px"></div>
-        <a href="../static/docs/CCoopResume.pdf" target="_blank"
-          ><span class="resume-pdf"> View Resume as PDF</span></a
-        >
-        <div class="my-links">
-          <a href="https://github.com/connorcoop0" target="_blank">
-            <img
-              class="content-icons"
-              src="../static/images/github.png"
-              alt="github"
-          /></a>
-          <a href="https://www.linkedin.com/in/connorcoop" target="_blank">
-            <img
-              class="content-icons"
-              src="../static/images/linkedin.png"
-              alt="linkedin"
-          /></a>
-        </div>
       </div>
-      <div id="education-section" class="education-section">
-        <span class="section-header">EDUCATION</span>
-        <h3>Bachelors in Computer Science | Minor: Communications</h3>
-        <h3><i>Florida State University</i> | December 2024</h3>
-        <h3>Relevant Coursework</h3>
-        <ul>
-          <li>
-            Software Engineering, Data Structures, Databases, Artificial
-            Intelligence, Mobile Programming (Android)
-          </li>
-        </ul>
-      </div>
-      <div id="skills-section" class="skills-section">
-        <span class="section-header">SKILLS/CERTIFICATIONS</span>
-        <ul>
-          <li>
-            <b style="color: black">Programming Languages</b>: C++, Python,
-            MySQL, JavaScript, HTML, CSS, Java, Unix/Linux scripting
-          </li>
-          <li>
-            <b style="color: black">Frameworks & Libraries</b>: React, Node.js,
-            Express, MongoDB
-          </li>
-          <li>
-            <b style="color: black">Tools</b>: Android Studio, Git, Visual
-            Studio Code
-          </li>
-          <li>
-            <b style="color: black">Certifications</b>:
-            <a
-              href="https://www.credly.com/earner/earned/share/97820de0-9c6d-4e01-95ea-bb8e721c83df"
-              target="_blank"
-              style="color:#2471a3"
-              >AWS Certified Cloud Practitioner</a
-            >,&nbsp;
-            <a
-              href="https://www.credly.com/badges/38b0ef8a-f38e-48a3-9a0c-f09f0720f3a0"
-              target="_blank"
-              style="color:#2471a3"
-              >AWS Certified Solutions Architect – Associate</a
-            >
-          </li>
-          
-        </ul>
-      </div>
-      <div id="projects-section" class="projects-section">
-        <span class="section-header">PROJECTS</span>
-        <h3>
-          <b
-            >PERSONAL WEBSITE | SERVERLESS AWS ARCHITECTURE |
-            <a
-              href="https://github.com/connorcoop0/connorcoopdotcom"
-              target="_blank"
-              ><span style="color: #2471a3">GitHub Link</span></a
-            ></b
-          >
-        </h3>
-        <ul>
-          <li>
-            Configured S3 static hosting with global delivery through
-            CloudFront, secure HTTPS via AWS Certificate Manager (ACM), and
-            domain routing with Route 53.
-          </li>
-          <li>
-            Developed serverless API endpoints with API Gateway + Lambda to log
-            and serve visitor metrics in real-time.
-          </li>
-          <li>
-            Integrated DynamoDB for efficient, secure tracking of unique visits,
-            displayed live via dynamic frontend JavaScript.
-          </li>
-          <li>
-            Implemented a CI/CD pipeline with AWS CodePipeline, GitHub, and
-            Lambda to automate deployments and trigger CloudFront cache
-            invalidation on every change in seconds.
-          </li>
-          <li>
-            Optimized for speed and scalability using CloudFront compression,
-            caching, and automatic SSL renewals.
-          </li>
-        </ul>
-        <h3>
-          <b>
-            File Tidy CLI | Python File Management Tool |
-            <a href="https://github.com/connorcoop0/file-tidy" target="_blank"
-              ><span style="color: #2471a3">GitHub Link</span></a
-            >
-          </b>
-        </h3>
-        <ul>
-          <li>
-            Developed a Python CLI tool for safe file deduplication and directory organization using SHA-256 hashing.
-          </li>
-          <li>
-            Supported recursive search, extension filtering, dry-run simulation, and multiple delete modes for flexibility.
-          </li>
-          <li>
-            Implemented categorized file sorting into target folders (Documents, Media, Code, Archives), with optional summary reporting.
-          </li>
-          <li>
-            Built entirely with Python’s standard library, emphasizing safety, clarity, and extensibility.
-          </li>
-        </ul>
-        
-        <h3>
-          <b>
-            Software Engineering Capstone Project | MERN Admin Dashboard |
-            <a
-              href="https://github.com/connorcoop0/mern-admin-dashboard"
-              target="_blank"
-              ><span style="color: #2471a3">GitHub Link</span></a
-            >
-          </b>
-        </h3>
-        <ul>
-          <li>
-            Developed a fully interactive admin dashboard using React, featuring
-            dynamic charts, tables, and real-world data visualizations.
-          </li>
-          <li>
-            Designed and implemented backend functionalities with Node.js and
-            Express, ensuring smooth data retrieval and updates.
-          </li>
-          <li>
-            Integrated MongoDB for efficient data storage, retrieval, and
-            management, handling user roles and permissions effectively.
-          </li>
-          <li>
-            Collaborated with a team of four using Agile methodologies, version
-            control via GitHub, and structured code reviews to maintain
-            high-quality development standards.
-          </li>
-          <li>
-            Implemented filtering, sorting, and pagination features for
-            transaction tracking, providing users with seamless data navigation.
-          </li>
-        </ul>
-        <h3>
-          <b>
-            Android Weather App |
-            <a href="https://github.com/connorcoop0/WeatherApp" target="_blank"
-              ><span style="color: #2471a3">GitHub Link</span></a
-            >
-          </b>
-        </h3>
-        <ul>
-          <li>
-            Developed a fully functional Android app using Java, enabling users
-            to fetch real-time weather data from a public API with a city-based
-            search feature.
-          </li>
-          <li>
-            Designed an intuitive and responsive UI to display current weather
-            conditions and multi-day forecasts using ListView and custom
-            layouts.
-          </li>
-          <li>
-            Parsed JSON responses from API calls efficiently, extracting and
-            displaying detailed weather insights, including temperature,
-            humidity, and wind speed.
-          </li>
-          <li>
-            Implemented robust error handling for smooth user experience,
-            ensuring proper handling of missing, inaccurate, or unavailable
-            data.
-          </li>
-        </ul>
-      </div>
-      <div id="experience-section" class="experience-section">
-        <span class="section-header">WORK EXPERIENCE</span>
-        <h3>
-          <b>CLOUD INTERN | ASCEND IT GROUP | MARCH 2025 – PRESENT</b>
-        </h3>
-        <ul>
-          <li>Earned AWS Solutions Architect – Associate certification</li>
-          <li>
-            Participated in internal discussions around cloud certifications and
-            learning paths
-          </li>
-          <li>
-            Gained exposure to AWS services and best practices through
-            mentorship and self-study
-          </li>
-        </ul>
-
-        <h3>
-          <b>INTERN | BAY SHELLFISH CO. | AUGUST 2024 – NOVEMBER 2024</b>
-        </h3>
-        <ul>
-          <li>
-            Processed and organized over 12 months of financial data in Excel,
-            ensuring 100% accuracy for grant application submissions.
-          </li>
-          <li>
-            Installed a 300-foot Wi-Fi bridge, greatly increasing lab Wi-Fi
-            connectivity speeds and enhancing operational efficiency for
-            research activities.
-          </li>
-        </ul>
-
-        <h3>
-          <b
-            >SALES REPRESENTATIVE | CALL MOTIVATED SELLERS | DECEMBER 2023 – MAY
-            2024</b
-          >
-        </h3>
-        <ul>
-          <li>
-            Conducted high-volume outbound calls to potential leads, refining
-            cold calling and persuasive communication skills.
-          </li>
-          <li>
-            Managed and updated a CRM database, ensuring accurate documentation
-            of client interactions and lead status.
-          </li>
-        </ul>
-
-        <h3>
-          <b>DELIVERY DRIVER | JIMMY JOHN'S | DECEMBER 2022 – MAY 2023</b>
-        </h3>
-        <ul>
-          <li>
-            Delivered orders with 95% on-time accuracy while ensuring positive
-            customer interactions.
-          </li>
-          <li>
-            Supported in-store operations during peak hours, assisting with food
-            prep and order packaging.
-          </li>
-        </ul>
-
-        <h3>
-          <b>TEAM MEMBER | CHICK-FIL-A | SUMMER 2020 & SUMMER 2021</b>
-        </h3>
-        <ul>
-          <li>
-            Provided fast, friendly, and efficient customer service in a
-            high-volume environment.
-          </li>
-          <li>
-            Assisted with food preparation, cashiering, and drive-thru
-            operations to maintain quick service and quality standards.
-          </li>
-        </ul>
-      </div>
-    <div
-      id="visitor-logs"
-      style="
-        margin:40px 0;
-        padding:20px;
-        background:#f4f4f4;
-        border-radius:8px;
-        font-family:'Roboto Mono', monospace;
-      "
-    >
-      <h2 style="color:#2471a3">Visitor Logs</h2>
-      <!-- total-visitors card goes here via JS -->
-      <div id="visitor-list"></div>          <!-- visible rows -->
-      <div id="visitor-extra" style="display:none"></div><!-- hidden rows -->
-      <button
-        id="visitor-toggle"
-        style="
-          margin-top:10px;
-          padding:6px 12px;
-          background:#2471a3;
-          color:#fff;
-          border:none;
-          border-radius:6px;
-          cursor:pointer;
-          font-family:'Roboto Mono', monospace;
-          font-size:14px;
-        "
-      >
-        Show all
-      </button>
     </div>
+  </section>
 
-<script>
-  // POST a page-view once at load
-  fetch("https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/logVisitor", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ event: "pageview" }),
-  }).catch(console.error);
+  <div class="section-divider"></div>
 
-  // ───────────────── visitor logs ─────────────────
-  const VISIBLE = 5;           // rows always shown
-  let expanded  = false;       // toggle state
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="fade-in">
+      <div class="section-label">04 / Projects</div>
+      <h2 class="section-title">Things I've Built</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-tech">
+            <span>AWS</span><span>S3</span><span>CloudFront</span><span>Lambda</span><span>DynamoDB</span>
+          </div>
+          <h3>This Website</h3>
+          <p>A fully serverless portfolio running on AWS. S3 static hosting, CloudFront CDN, CI/CD pipeline with CodePipeline, and real-time visitor logging via API Gateway + Lambda. Deploys in under 5 seconds.</p>
+          <a href="https://github.com/connorcoop0/connorcoopdotcom" target="_blank" class="project-link">View on GitHub &rarr;</a>
+        </div>
+        <div class="project-card">
+          <div class="project-tech">
+            <span>Python</span><span>Pygame</span>
+          </div>
+          <h3>2D Platformer Game</h3>
+          <p>A custom-built platformer with physics, collision detection, sprite animation, and modular level design. Optimized to maintain 60 FPS with 1000+ active entities on screen.</p>
+          <a href="https://github.com/connorcoop0" target="_blank" class="project-link">View on GitHub &rarr;</a>
+        </div>
+        <div class="project-card">
+          <div class="project-tech">
+            <span>Python</span><span>SHA-256</span><span>CLI</span>
+          </div>
+          <h3>File Tidy CLI</h3>
+          <p>A CLI tool for safe file deduplication and directory cleanup using hash-based detection. Supports recursive search, dry-run mode, and auto-sorting files into organized categories.</p>
+          <a href="https://github.com/connorcoop0/file-tidy" target="_blank" class="project-link">View on GitHub &rarr;</a>
+        </div>
+        <div class="project-card">
+          <div class="project-tech">
+            <span>React</span><span>Node.js</span><span>MongoDB</span><span>Express</span>
+          </div>
+          <h3>MERN Admin Dashboard</h3>
+          <p>Full-stack admin dashboard built as a capstone project. Dynamic charts, data tables, and real-world visualizations with a complete REST API backend.</p>
+          <a href="https://github.com/connorcoop0/mern-admin-dashboard" target="_blank" class="project-link">View on GitHub &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  async function loadVisitorLogs() {
-    try {
-      const res  = await fetch(
-        "https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/getVisitorLogs"
-      );
-      const logs = await res.json();
+  <div class="section-divider"></div>
 
-      // handles
-      const box   = document.getElementById("visitor-logs");
-      const list  = document.getElementById("visitor-list");
-      const extra = document.getElementById("visitor-extra");
-      const btn   = document.getElementById("visitor-toggle");
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="fade-in">
+      <div class="section-label">05 / Experience</div>
+      <h2 class="section-title">Where I've Worked</h2>
+      <div class="timeline">
+        <div class="timeline-item current">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">June 2025 &ndash; Present</div>
+          <div class="timeline-role">Lead Technician</div>
+          <div class="timeline-company">Coop Tech Support</div>
+          <ul class="timeline-details">
+            <li>Supported 100+ clients across Windows and macOS, resolving over 95% of issues in a single visit</li>
+            <li>Built and deployed 5+ custom websites for small businesses and nonprofits</li>
+            <li>Built secure, scalable AWS hosting for clients, cutting annual costs by ~25%</li>
+            <li>Grew client base entirely through word-of-mouth referrals</li>
+            <li>Created internal knowledge base with structured case documentation</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">March 2025 &ndash; April 2025</div>
+          <div class="timeline-role">Cloud Intern Contractor</div>
+          <div class="timeline-company">Ascend IT Group</div>
+          <ul class="timeline-details">
+            <li>Gained hands-on exposure to cloud services, automation, and infrastructure deployment</li>
+            <li>Earned AWS Solutions Architect Associate certification within two weeks</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Aug 2024 &ndash; Nov 2024</div>
+          <div class="timeline-role">Intern</div>
+          <div class="timeline-company">Bay Shellfish Co.</div>
+          <ul class="timeline-details">
+            <li>Set up a 300-ft Wi-Fi bridge to restore full-site connectivity</li>
+            <li>Organized and validated large datasets for grant submission in Microsoft Excel</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      // rebuild unique-IP map
-      const uniq = new Map();
-      logs.forEach(({ ip = "Unknown IP", timestamp }) => {
-        if (!uniq.has(ip)) uniq.set(ip, timestamp);
+  <div class="section-divider"></div>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="fade-in">
+      <div class="section-label">06 / Education</div>
+      <h2 class="section-title">Background</h2>
+      <div class="edu-card">
+        <div>
+          <h3>B.A. in Computer Science</h3>
+          <div class="school">Florida State University &bull; Minor in Communications</div>
+        </div>
+        <div class="edu-year">2024</div>
+        <div class="edu-coursework">
+          <div class="detail-label">Relevant Coursework</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Software Engineering</span>
+            <span class="skill-tag">Data Structures</span>
+            <span class="skill-tag">Databases</span>
+            <span class="skill-tag">Artificial Intelligence</span>
+            <span class="skill-tag">Mobile Programming</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- VISITOR LOGS -->
+  <section>
+    <div class="fade-in">
+      <div class="visitor-section">
+        <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Visitor Log <span class="visitor-count" id="visitor-count">Loading...</span></h3>
+        <div id="visitor-list"></div>
+        <div id="visitor-extra" style="display:none"></div>
+        <button id="visitor-toggle" style="display:none">Show all</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="fade-in">
+      <div class="section-label">07 / Contact</div>
+      <h2 class="section-title">Let's Work Together</h2>
+      <p class="contact-sub">Need tech help or want to build something? Reach out.</p>
+      <div class="contact-links">
+        <a href="mailto:connorcoop0@gmail.com" class="contact-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> connorcoop0@gmail.com</a>
+        <a href="tel:7278714493" class="contact-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (727) 871-4493</a>
+        <a href="https://www.linkedin.com/in/connorcoop" target="_blank" class="contact-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn</a>
+        <a href="https://github.com/connorcoop0" target="_blank" class="contact-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Connor Coop. All rights reserved.</p>
+    <p class="built-with">Built with AWS &bull; S3 &bull; CloudFront &bull; Lambda</p>
+  </footer>
+
+  <script>
+    // ─── HAMBURGER MENU ───
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    // Close menu on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
       });
+    });
 
-      // fresh “total” card each poll
-      const card = document.createElement("div");
-      card.style.cssText =
-        "background:#fff;padding:15px;border-radius:8px;margin-bottom:20px;" +
-        "box-shadow:0 2px 4px rgba(0,0,0,.1);font-size:18px;color:#2471A3;font-weight:bold";
-      card.textContent = `Total Unique Visitors: ${uniq.size}`;
-      // replace old card (index 1, right after <h2>)
-      if (box.children[1]) box.children[1].replaceWith(card);
+    // ─── SCROLL FADE-IN ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-      // build rows
-      const rows = [...uniq.entries()]
-        .sort((a, b) => new Date(b[1]) - new Date(a[1]))
-        .map(([_, ts]) => {
-          const d = new Date(ts).toLocaleString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          });
-          return `
-            <div style="
-              background:#f9f9f9;padding:10px;border-radius:8px;margin-bottom:10px;
-              box-shadow:0 1px 3px rgba(0,0,0,.08);font-size:16px;color:#333">
-              Visited: ${d}
-            </div>`;
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ─── VISITOR LOGGING ───
+    fetch("https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/logVisitor", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event: "pageview" }),
+    }).catch(console.error);
+
+    const VISIBLE = 5;
+    let expanded = false;
+
+    async function loadVisitorLogs() {
+      try {
+        const res = await fetch("https://5v7zqgjh46.execute-api.us-east-1.amazonaws.com/getVisitorLogs");
+        const logs = await res.json();
+
+        const countEl = document.getElementById("visitor-count");
+        const list = document.getElementById("visitor-list");
+        const extra = document.getElementById("visitor-extra");
+        const btn = document.getElementById("visitor-toggle");
+
+        const uniq = new Map();
+        logs.forEach(({ ip = "Unknown IP", timestamp }) => {
+          if (!uniq.has(ip)) uniq.set(ip, timestamp);
         });
 
-      list.innerHTML  = rows.slice(0, VISIBLE).join("");
-      extra.innerHTML = rows.slice(VISIBLE).join("");
+        countEl.textContent = `${uniq.size} unique visitors`;
 
-      // show / hide long tail
-      extra.style.display = expanded ? "block" : "none";
+        const rows = [...uniq.entries()]
+          .sort((a, b) => new Date(b[1]) - new Date(a[1]))
+          .map(([_, ts]) => {
+            const d = new Date(ts).toLocaleString("en-US", {
+              month: "short", day: "numeric", year: "numeric",
+              hour: "2-digit", minute: "2-digit",
+            });
+            return `<div class="visitor-row">Visited: ${d}</div>`;
+          });
 
-      // button housekeeping
-      if (rows.length > VISIBLE) {
-        btn.style.display = "inline-block";
-        btn.textContent   = expanded ? "Hide" : "Show all";
-        // attach (or re-attach) handler
-        btn.onclick = () => {
-          expanded = !expanded;
-          extra.style.display = expanded ? "block" : "none";
-          btn.textContent     = expanded ? "Hide" : "Show all";
-        };
-      } else {
-        btn.style.display = "none";
+        list.innerHTML = rows.slice(0, VISIBLE).join("");
+        extra.innerHTML = rows.slice(VISIBLE).join("");
+        extra.style.display = expanded ? "block" : "none";
+
+        if (rows.length > VISIBLE) {
+          btn.style.display = "inline-block";
+          btn.textContent = expanded ? "Hide" : "Show all";
+          btn.onclick = () => {
+            expanded = !expanded;
+            extra.style.display = expanded ? "block" : "none";
+            btn.textContent = expanded ? "Hide" : "Show all";
+          };
+        } else {
+          btn.style.display = "none";
+        }
+      } catch (err) {
+        console.error("Failed to load visitor logs:", err);
       }
-    } catch (err) {
-      console.error("Failed to load visitor logs:", err);
     }
-  }
 
-  // first run + polling
-  loadVisitorLogs();
-  setInterval(loadVisitorLogs, 30000);   // 30-s refresh
-</script>
+    loadVisitorLogs();
+    setInterval(loadVisitorLogs, 30000);
+  </script>
 
-  </body>
+</body>
 </html>
